@@ -1,434 +1,374 @@
-Perfect 👍
-Ab main **POORA WEB PAPER ka COMPLETE, COMBINED, EXAM-ORIENTED NOTES** aik hi jagah de raha hoon.
-Isko tum **theory + practical dono exams** mein likh sakte ho.
-Language simple rakhi hai + headings clear hain (examiner friendly).
+# Information Security – Complete Final Exam Notes
 
 ---
 
-# 🌐 WEB DEVELOPMENT – COMPLETE EXAM NOTES
+## 1. Diffie–Hellman Key Exchange (DH)
+
+### Definition
+
+Diffie–Hellman is a **key exchange algorithm** used to securely generate a **shared secret key** over an insecure channel. It does **not encrypt messages**, it only helps both parties agree on the same secret key.
 
 ---
 
-## 1️⃣ Web Platform Constraints (Software Engineering)
+### Working (Your Given Example Explained)
 
-**Definition:**
-Web platform constraints wo limitations hoti hain jo web applications ke design, performance aur security ko affect karti hain.
+**Step 1: Public Parameters**
 
-### Core Constraints:
+* Prime number **P = 23**
+* Generator **G = 9**
 
-1. **Network Bandwidth**
-2. **Security**
-3. **Performance**
-4. **Accessibility**
-5. **Browser Compatibility**
-6. **Scalability**
+These values are public and known to everyone.
 
 ---
 
-## 2️⃣ Bandwidth Constraint
+**Step 2: Private Keys**
 
-**Meaning:**
-Limited data transfer speed between client & server.
+* Alice chooses private key **a = 4**
+* Bob chooses private key **b = 3**
 
-### Effects:
-
-* Slow page loading
-* Poor user experience
-
-### Solution:
-
-* Image compression
-* Caching
-* CDN
+Private keys are **never shared**.
 
 ---
 
-## 3️⃣ Performance Constraint
+**Step 3: Public Key Calculation**
 
-**Meaning:**
-Web app ka slow response time.
+* Alice computes:
 
-### Causes:
+  x = G^a mod P = 9^4 mod 23 = 6
 
-* Heavy scripts
-* Poor database queries
+* Bob computes:
 
-### Solution:
+  y = G^b mod P = 9^3 mod 23 = 16
 
-* Optimized queries
-* Minified JS/CSS
+These values are public.
 
 ---
 
-## 4️⃣ Accessibility
+**Step 4–5: Exchange Public Values**
 
-**Meaning:**
-Website har user (disabled users bhi) use kar sakay.
-
-### Features:
-
-* Screen reader support
-* Keyboard navigation
-* Alt text for images
+* Alice sends **x = 6** to Bob
+* Bob sends **y = 16** to Alice
 
 ---
 
-## 5️⃣ Full Stack Development
+**Step 6: Shared Secret Calculation**
 
-**Definition:**
-Frontend + Backend + Database development.
+* Alice computes:
 
-### Stack:
+  k = y^a mod P = 16^4 mod 23 = 9
 
-* Frontend: HTML, CSS, JS
-* Backend: PHP
-* Database: MySQL
-* APIs
+* Bob computes:
+
+  k = x^b mod P = 6^3 mod 23 = 9
 
 ---
 
-## 6️⃣ UI / UX with Server Logic
+### Final Result
 
-* **UI:** User interface (buttons, forms)
-* **UX:** User experience
-* **Server Logic:** PHP handles data & business logic
+Both Alice and Bob get the **same secret key = 9**
 
----
-
-## 7️⃣ API (Application Programming Interface)
-
-**Definition:**
-API client aur server ke beech communication ka bridge hoti hai.
-
-### API Request:
-
-* GET
-* POST
-* PUT
-* DELETE
-
-### API Response:
-
-* JSON / XML
-* Status code (200, 404, 500)
+✔ Secure key exchange achieved
 
 ---
 
-## 8️⃣ Third Party APIs
+### Why DH is Secure?
 
-**Example:**
-
-* Google Maps API
-* Payment Gateway API
-
-### Risks:
-
-* Data leakage
-* Dependency issues
+* Private keys are never transmitted
+* Discrete logarithm problem is computationally hard
 
 ---
 
-## 9️⃣ Cookies & Sessions
+## 2. RSA Algorithm
 
-### Cookies:
+### Definition
 
-* Browser side
-* Small data store
+RSA is an **asymmetric encryption algorithm** used for:
 
-### Types of Cookies:
+* Encryption / Decryption
+* Digital Signatures
+* Key Exchange
 
-1. Session Cookie
-2. Persistent Cookie
-3. Secure Cookie
-4. HttpOnly Cookie
-5. Third-party Cookie
+It uses **two keys**:
 
-### Cookie Structure:
-
-```
-name=value; expires; path; domain; secure;
-```
-
-### Session:
-
-* Server side
-* Login data store
+* Public Key (encryption)
+* Private Key (decryption)
 
 ---
 
-## 🔐 WEB SECURITY & ATTACKS
+## RSA Key Generation Steps
+
+### Step 1: Choose Two Prime Numbers
+
+Let:
+
+* p = 61
+* q = 53
 
 ---
 
-## 🔴 SQL Injection
+### Step 2: Compute n
 
-**Definition:**
-Malicious SQL code inject karna.
-
-**Example:**
-
-```sql
-' OR '1'='1
-```
-
-**Prevention:**
-
-* Prepared statements
-* Input validation
+n = p × q = 61 × 53 = 3233
 
 ---
 
-## 🔴 XSS (Cross Site Scripting)
+### Step 3: Compute Totient (φ)
 
-**Definition:**
-Malicious JavaScript inject karna.
-
-**Types:**
-
-* Stored
-* Reflected
-* DOM-based
-
-**Prevention:**
-
-* Sanitize input
-* Encode output
+φ(n) = (p − 1)(q − 1)
+φ(n) = 60 × 52 = 3120
 
 ---
 
-## 🔴 XSRF / CSRF
+### Step 4: Choose Public Key e
 
-**Definition:**
-User se unknowingly request send karwana.
+Conditions:
 
-**Prevention:**
+* 1 < e < 3120
+* gcd(e, 3120) = 1
 
-* CSRF tokens
-* SameSite cookies
+Choose:
 
----
-
-## 🔴 Authentication Attack
-
-* Password guessing
-* Credential stuffing
-
-**Prevention:**
-
-* Strong passwords
-* CAPTCHA
+* e = 17
 
 ---
 
-## 🔴 Broken Authorization
+### Step 5: Compute Private Key d
 
-**Meaning:**
-Unauthorized user ko access mil jana.
+Find **d** such that:
 
-**Prevention:**
+d × e ≡ 1 (mod 3120)
 
-* Role-based access control
+Result:
 
----
-
-## 🔴 Data Exposure
-
-**Meaning:**
-Sensitive data leak ho jana.
-
-**Prevention:**
-
-* Encryption
-* HTTPS
+* d = 2753
 
 ---
 
-## 🔴 Man in the Middle (MITM)
+### RSA Keys
 
-**Meaning:**
-Client & server ke beech data intercept karna.
-
-**Prevention:**
-
-* SSL / TLS
-* HTTPS
+* **Public Key** = (e = 17, n = 3233)
+* **Private Key** = (d = 2753, n = 3233)
 
 ---
 
-## 🔴 Insecure APIs
+## RSA Encryption & Decryption
 
-**Risks:**
+### Encryption Formula
 
-* No authentication
-* Poor validation
+C = M^e mod n
 
-**Prevention:**
+### Decryption Formula
 
-* API keys
-* OAuth
-* Rate limiting
+M = C^d mod n
 
 ---
 
-## 🔴 Session Hijacking
+### Example
 
-**Meaning:**
-Session ID steal kar lena.
+Message:
+M = 65
 
-**Prevention:**
+Encryption:
+C = 65^17 mod 3233 = 2790
 
-* Secure cookies
-* Session regeneration
+Decryption:
+M = 2790^2753 mod 3233 = 65
 
----
-
-## 🔴 File Upload Attack
-
-**Meaning:**
-Malicious file upload karna.
-
-**Prevention:**
-
-* File type check
-* Rename files
-* Size limit
+✔ Original message recovered
 
 ---
 
-## 🔴 Clickjacking
+## 3. Hash Functions
 
-**Meaning:**
-User se hidden action click karwana.
+### Definition
 
-**Prevention:**
+A hash function converts **variable-length input** into a **fixed-length output**.
 
-* X-Frame-Options header
+Example:
 
----
-
-## 🔴 DoS (Denial of Service)
-
-**Meaning:**
-Server overload kar dena.
-
-**Prevention:**
-
-* Rate limiting
-* Firewall
+* Password → Hash value
 
 ---
 
-## 🔐 Password Hashing
+### Properties
 
-**Definition:**
-Password ko unreadable form mein store karna.
-
-**Example (PHP):**
-
-```php
-password_hash($pass, PASSWORD_DEFAULT);
-```
+* Fixed output size
+* Fast computation
+* One-way function
 
 ---
 
-## 🌐 Browser Isolation
+### One-Way Hash Function
 
-**Meaning:**
-Browser ko server side isolate karna to stop attacks.
-
----
-
-## ⚙️ PHP CONCEPTS (EXAM FAVORITES)
+* Cannot be reversed
+* Used in password storage
 
 ---
 
-## GET vs POST
+### Password Hashing Example
 
-| GET         | POST   |
-| ----------- | ------ |
-| URL data    | Hidden |
-| Less secure | Secure |
+Password: apple
+Hash: A7 6D 8B 99
 
----
-
-## echo vs print
-
-| echo            | print        |
-| --------------- | ------------ |
-| Fast            | Slow         |
-| Multiple values | Single value |
+Passwords are **never stored in plain text**.
 
 ---
 
-## == vs === (JS / PHP)
+## 4. Password Salting
 
-* `==` → value compare
-* `===` → value + type compare ✅
+### Problem Without Salt
 
----
+Same passwords → same hash
 
-## include vs require
+### Solution: Salt
 
-| include          | require      |
-| ---------------- | ------------ |
-| Warning          | Fatal error  |
-| Script continues | Script stops |
+Random value added to password before hashing
 
-### include_once / require_once
-
-* File sirf aik baar include hoti hai
+Hash = H(Salt + Password)
 
 ---
 
-## Constructor vs Destructor (PHP)
+### Example
 
-```php
-class Test {
- function __construct() {
-  echo "Object Created";
- }
- function __destruct() {
-  echo "Object Destroyed";
- }
-}
-```
+H("9195 + apple") = 92 C6 13 C1
+
+✔ Prevents rainbow table attacks
 
 ---
 
-## Procedural vs OOP
+## 5. Digital Signatures
 
-| Procedural | OOP      |
-| ---------- | -------- |
-| Functions  | Classes  |
-| Simple     | Secure   |
-| Less reuse | Reusable |
+### Definition
 
----
+A digital signature provides:
 
-## Black Box vs White Box Testing
-
-| Black Box          | White Box      |
-| ------------------ | -------------- |
-| No code knowledge  | Code knowledge |
-| Functional testing | Logic testing  |
+* Authentication
+* Integrity
+* Non-repudiation
 
 ---
 
-## 🔚 Exam Writing Tips 💯
+### Working
 
-* Definition + 4 points
-* Table comparisons
-* Small code snippets
-* Headings underline karo
+1. Document is hashed
+2. Hash is encrypted with sender’s private key
+3. Receiver decrypts using public key
+4. Hash values compared
 
 ---
 
-Agar tum chaho:
+## 6. Hash Collisions
 
-* 📄 **Iska PDF bana doon**
-* 📝 **MCQs**
-* 🧪 **Practical paper**
-* ❓ **Short + long questions**
-* 🎯 **Guess paper**
+### Definition
 
-👉 bas bolo, kis format mein chahiye 🔥
+When two different inputs produce the **same hash output**.
+
+---
+
+### Collision Resistance
+
+A good hash function makes collisions **computationally infeasible**.
+
+---
+
+## 7. Cryptographic Hash Functions
+
+### Definition
+
+A cryptographic hash function is:
+
+* One-way
+* Collision-resistant
+
+---
+
+### Examples
+
+* MD5 (128-bit)
+* SHA-1 (160-bit)
+* SHA-256 (256-bit)
+
+---
+
+## 8. Authentication
+
+### Definition
+
+Authentication verifies:
+
+* Identity of user
+* Integrity of data
+
+---
+
+### Examples
+
+* ATM PIN
+* Login passwords
+* Digital certificates
+
+---
+
+## 9. Kerberos (Overview)
+
+### Definition
+
+Kerberos is a **network authentication protocol** using **tickets** and **symmetric keys**.
+
+---
+
+### Main Components
+
+* Client
+* Authentication Server (AS)
+* Ticket Granting Server (TGS)
+* Service Server
+
+---
+
+### Advantages
+
+* No password sent over network
+* Mutual authentication
+
+---
+
+## 10. Stream Ciphers
+
+### Definition
+
+Stream ciphers encrypt data **bit-by-bit or byte-by-byte**.
+
+---
+
+### Examples
+
+* RC4
+* Salsa20
+
+---
+
+### Advantages
+
+* Fast
+* Low memory usage
+
+---
+
+## FINAL EXAM TIP
+
+✔ Definitions yaad rakho
+✔ Steps sequence mein likho
+✔ Numerical examples zaroor show karo
+✔ Formulas highlight karo
+
+---
+
+If you want:
+
+* Short exam answers
+* MCQs
+* Numericals practice
+* Slides-wise explanation
+
+Just tell me 👍
